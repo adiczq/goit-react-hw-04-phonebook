@@ -1,0 +1,15 @@
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+  gap: 7px;
+}
