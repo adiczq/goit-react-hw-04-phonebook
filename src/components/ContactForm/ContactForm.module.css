@@ -1,0 +1,35 @@
+.container {
+  width: 15vw;
+  margin: 0 auto;
+}
+
+.form {
+  border-radius: 5px;
+  padding: 5px 0 5px 0;
+  border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.label {
+  width: 12vw;
+  padding-top: 20px;
+  font-weight: 600;
+}
+.login {
+  width: 95%;
+  height: 30px;
+  background-color: lightgray;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+.button {
+  width: 5vw;
+  height: 30px;
+  background-color: lightgray;
+  border-radius: 5px;
+  cursor: pointer;
+}
