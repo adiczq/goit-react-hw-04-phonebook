@@ -1,0 +1,20 @@
+.container {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.label {
+  padding-top: 20px;
+  font-weight: 600;
+}
+
+.input {
+  height: 30px;
+  background-color: lightgray;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
