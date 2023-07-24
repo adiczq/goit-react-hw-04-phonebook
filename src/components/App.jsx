@@ -9,24 +9,12 @@ const App = () => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
 
-  const saveStateToLocalStorage = () => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-    localStorage.setItem('filter', filter);
-  };
-
   useEffect(() => {
-    const storedContacts = localStorage.getItem('contacts');
-    const storedFilter = localStorage.getItem('filter');
+    const saveStateToLocalStorage = () => {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      localStorage.setItem('filter', filter);
+    };
 
-    if (storedContacts) {
-      setContacts(JSON.parse(storedContacts));
-    }
-    if (storedFilter) {
-      setFilter(storedFilter);
-    }
-  }, []);
-
-  useEffect(() => {
     saveStateToLocalStorage();
   }, [contacts, filter]);
 
