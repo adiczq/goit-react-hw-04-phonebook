@@ -1,5 +1,6 @@
 import React from 'react';
 import css from './Filter.module.css';
+
 const Filter = ({ filter, onFilterChange }) => {
   return (
     <div className={css.container}>
