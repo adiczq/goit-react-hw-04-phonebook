@@ -78,7 +78,7 @@ const App = () => {
   );
 
   return (
-    <div className={css.cointener}>
+    <div className={css.container}>
       <h1>Phonebook</h1>
       <ContactForm onSubmit={handleAddContact} />
 
