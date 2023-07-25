@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
@@ -8,14 +8,46 @@ import css from './App.module.css';
 const App = () => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+  const prevContactsRef = useRef([]);
+  const prevFilterRef = useRef('');
 
   useEffect(() => {
-    const saveStateToLocalStorage = () => {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-      localStorage.setItem('filter', filter);
-    };
+    const storedContacts = localStorage.getItem('contacts');
+    const storedFilter = localStorage.getItem('filter');
 
-    saveStateToLocalStorage();
+    console.log('Stored Contacts:', storedContacts);
+    console.log('Stored Filter:', storedFilter);
+
+    if (storedContacts) {
+      setContacts(JSON.parse(storedContacts));
+    }
+    if (storedFilter) {
+      setFilter(storedFilter);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Porównaj poprzedni stan z aktualnym stanem i wykonaj tylko wtedy zapis do localStorage
+    if (
+      JSON.stringify(prevContactsRef.current) !== JSON.stringify(contacts) ||
+      prevFilterRef.current !== filter
+    ) {
+      const saveStateToLocalStorage = () => {
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+        // Sprawdź, czy filter jest niepusty, zanim go zapiszesz w localStorage
+        if (filter !== '') {
+          localStorage.setItem('filter', filter);
+        }
+
+        console.log('Contacts Saved:', contacts);
+        console.log('Filter Saved:', filter);
+      };
+      saveStateToLocalStorage();
+
+      // Zaktualizuj refy po zapisaniu danych do localStorage
+      prevContactsRef.current = contacts;
+      prevFilterRef.current = filter;
+    }
   }, [contacts, filter]);
 
   const handleAddContact = newContact => {
@@ -37,8 +69,8 @@ const App = () => {
     );
   };
 
-  const handleFilterChange = filter => {
-    setFilter(filter);
+  const handleFilterChange = newFilter => {
+    setFilter(newFilter);
   };
 
   const filteredContacts = contacts.filter(contact =>
@@ -46,7 +78,7 @@ const App = () => {
   );
 
   return (
-    <div className={css.container}>
+    <div className={css.cointener}>
       <h1>Phonebook</h1>
       <ContactForm onSubmit={handleAddContact} />
 
